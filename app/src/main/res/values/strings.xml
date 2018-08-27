@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Automation Test</string>
+
+    <string name="lottie_file_name" translatable="false">simple_tick_2.json</string>
+
+    <string name="hint_age">Age</string>
+    <string name="hint_name">Name</string>
+
+    <string name="ok">OK</string>
+    <string name="clean">Clean fields</string>
+
+    <string name="your_name">Your name is %s</string>
+    <string name="your_age">\u0020and you are %s years old!</string>
+
+    <string name="splash_message" translatable="false">Mobile app automation\nmade awesome</string>
+
+</resources>
