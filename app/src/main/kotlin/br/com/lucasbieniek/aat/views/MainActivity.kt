@@ -52,7 +52,9 @@ class MainActivity : AppCompatActivity() {
         })
 
         btnOk.setOnClickListener {
-            if (isKeyboardOpened()) closeKeyboard(currentFocus)
+            currentFocus?.let { currentFocus ->
+                if (isKeyboardOpened()) closeKeyboard(currentFocus)
+            }
 
             val age = textInputEditTextAge.text.toString().toInt()
             val name = textInputEditTextName.text.toString()
@@ -65,8 +67,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnClean.setOnClickListener {
-            textInputEditTextName.text.clear()
-            textInputEditTextAge.text.clear()
+            textInputEditTextName.text?.clear()
+            textInputEditTextAge.text?.clear()
         }
     }
 
