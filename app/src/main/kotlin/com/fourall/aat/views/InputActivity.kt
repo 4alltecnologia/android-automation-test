@@ -1,18 +1,24 @@
 package com.fourall.aat.views
 
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import com.fourall.aat.Application
 import com.fourall.aat.R
+import com.fourall.aat.data.di.CommandInjector
+import com.fourall.aat.data.local.UserLocalDataSource
 import com.fourall.aat.databinding.ActivityInputBinding
 import com.fourall.aat.extensions.closeKeyboard
 import com.fourall.aat.extensions.isKeyboardOpened
 import com.fourall.aat.models.GenericCommand
 import com.fourall.aat.models.User
+import com.fourall.aat.repositories.UserDataRepository
 import com.fourall.aat.viewmodels.InputViewModel
+import com.fourall.aat.viewmodels.factory.InputViewModelFactory
 import kotlinx.android.synthetic.main.activity_input.*
 
 class InputActivity : BaseActivity() {
@@ -110,10 +116,13 @@ class InputActivity : BaseActivity() {
 
     private fun prepareViewModel() {
 
-        // val inputViewModelFactory = InputViewModelFactory(UserDataRepository())
+        val inputViewModelFactory = InputViewModelFactory(
+            UserDataRepository(UserLocalDataSource(Application.database?.userDao()!!)),
+            CommandInjector
+        )
 
-        /*inputViewModel = ViewModelProviders.of(this, inputViewModelFactory)
-                .get(InputViewModel::class.java)*/
+        inputViewModel = ViewModelProviders.of(this, inputViewModelFactory)
+            .get(InputViewModel::class.java)
 
         inputViewModel.apply {
 

@@ -19,7 +19,5 @@ interface UserDataContract {
             name: String,
             age: String
         )
-
-        fun getUserById(id: Int): User
     }
 }

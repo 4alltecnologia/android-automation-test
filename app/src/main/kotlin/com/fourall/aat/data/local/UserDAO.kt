@@ -11,7 +11,7 @@ interface UserDAO {
     @Insert
     fun saveUser(user: User)
 
-    @Query("SELECT * FROM user WHERE user.id = :id LIMIT 1")
-    fun getUserById(id: Int): User
+    @Query("SELECT * FROM user LIMIT 1")
+    fun getUser(): User
 
 }
