@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
             val age = textInputEditTextAge.text.toString()
             val name = textInputEditTextName.text.toString()
 
-            val person = User(age, name)
+            val person = User(age = age, name = name)
 
             val intent = Intent(this, ResultActivity::class.java)
             intent.putExtra("person", person)

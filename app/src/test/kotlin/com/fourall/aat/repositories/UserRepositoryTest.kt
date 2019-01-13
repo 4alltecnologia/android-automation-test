@@ -29,7 +29,7 @@ class UserRepositoryTest {
         val USER_NAME = "Zé Renato"
         val USER_AGE = "45"
 
-        val user = User(USER_NAME, USER_AGE)
+        val user = User(name = USER_NAME, age = USER_AGE)
 
         // ACT
 
