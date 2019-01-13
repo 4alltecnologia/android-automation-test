@@ -7,7 +7,7 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 
@@ -50,8 +50,6 @@ class UserRepositoryTest {
 
         val USER_NAME = "Zé Renato"
         val USER_AGE = "45"
-
-        val user = User(USER_NAME, USER_AGE)
 
         // ACT
 

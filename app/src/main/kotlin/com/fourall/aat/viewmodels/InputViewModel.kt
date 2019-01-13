@@ -7,8 +7,8 @@ import com.fourall.aat.models.GenericCommand
 import com.fourall.aat.models.User
 
 class InputViewModel(
-        private val userRepository: UserRepository,
-        private val commandProvider: CommandProvider
+    private val userRepository: UserRepository,
+    private val commandProvider: CommandProvider
 ) : ViewModel() {
 
     val command: SingleLiveEvent<GenericCommand> = commandProvider.getCommand()

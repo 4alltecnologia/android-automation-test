@@ -1,17 +1,24 @@
 package com.fourall.aat.views
 
+import android.arch.lifecycle.Observer
 import android.content.Intent
+import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
 import com.fourall.aat.R
+import com.fourall.aat.databinding.ActivityInputBinding
 import com.fourall.aat.extensions.closeKeyboard
 import com.fourall.aat.extensions.isKeyboardOpened
+import com.fourall.aat.models.GenericCommand
 import com.fourall.aat.models.User
-import kotlinx.android.synthetic.main.activity_main.*
+import com.fourall.aat.viewmodels.InputViewModel
+import kotlinx.android.synthetic.main.activity_input.*
 
-class InputActivity : AppCompatActivity() {
+class InputActivity : BaseActivity() {
+
+    private lateinit var activityInputBinding: ActivityInputBinding
+    private lateinit var inputViewModel: InputViewModel
 
     private var nameIsOk = false
     private var ageIsOk = false
@@ -19,12 +26,32 @@ class InputActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
-        // toolbar title
+        prepareUi()
+        prepareListeners()
+        prepareViewModel()
+    }
+
+    override fun onResume() {
+
+        super.onResume()
+
+        inputViewModel.loadUser()
+
+        enableButtonNext(nameIsOk && ageIsOk)
+        enableButtonClean(nameIsOk || ageIsOk)
+    }
+
+    private fun prepareUi() {
+
+        activityInputBinding = DataBindingUtil.setContentView(this, R.layout.activity_input)
+
         title = getString(R.string.app_name)
+    }
 
-        textInputEditTextName.addTextChangedListener(object : TextWatcher {
+    private fun prepareListeners() {
+
+        userNameTextInputEditText.addTextChangedListener(object : TextWatcher {
 
             override fun afterTextChanged(p0: Editable?) {
 
@@ -41,7 +68,7 @@ class InputActivity : AppCompatActivity() {
             }
         })
 
-        textInputEditTextAge.addTextChangedListener(object : TextWatcher {
+        userAgeTextInputEditText.addTextChangedListener(object : TextWatcher {
 
             override fun afterTextChanged(p0: Editable?) {
 
@@ -58,12 +85,12 @@ class InputActivity : AppCompatActivity() {
             }
         })
 
-        btnOk.setOnClickListener {
+        okButton.setOnClickListener {
 
             if (isKeyboardOpened()) closeKeyboard(currentFocus)
 
-            val age = textInputEditTextAge.text.toString()
-            val name = textInputEditTextName.text.toString()
+            val age = userAgeTextInputEditText.text.toString()
+            val name = userNameTextInputEditText.text.toString()
 
             val person = User(age, name)
 
@@ -74,26 +101,48 @@ class InputActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        btnClean.setOnClickListener {
+        cleanButton.setOnClickListener {
 
-            textInputEditTextName.text.clear()
-            textInputEditTextAge.text.clear()
+            userNameTextInputEditText.text?.clear()
+            userAgeTextInputEditText.text?.clear()
         }
     }
 
-    override fun onResume() {
+    private fun prepareViewModel() {
 
-        super.onResume()
+        // val inputViewModelFactory = InputViewModelFactory(UserDataRepository())
 
-        enableButtonNext(nameIsOk && ageIsOk)
-        enableButtonClean(nameIsOk || ageIsOk)
+        /*inputViewModel = ViewModelProviders.of(this, inputViewModelFactory)
+                .get(InputViewModel::class.java)*/
+
+        inputViewModel.apply {
+
+            command.removeObservers(this@InputActivity)
+
+            command.observe(this@InputActivity, Observer { cmd ->
+
+                cmd?.let { triggerCommand(it) }
+            })
+        }
+    }
+
+    private fun triggerCommand(command: GenericCommand) {
+
+        when (command) {
+
+            is InputViewModel.Command.ShowUserInfo -> {
+
+                userNameTextInputEditText.setText(command.user.name)
+                userAgeTextInputEditText.setText(command.user.age)
+            }
+        }
     }
 
     private fun enableButtonNext(enableButton: Boolean) {
-        btnOk.isEnabled = enableButton
+        okButton.isEnabled = enableButton
     }
 
     private fun enableButtonClean(enableButton: Boolean) {
-        btnClean.isEnabled = enableButton
+        cleanButton.isEnabled = enableButton
     }
 }

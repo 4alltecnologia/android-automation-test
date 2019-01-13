@@ -5,8 +5,12 @@ import com.fourall.aat.contract.repositories.UserRepository
 import com.fourall.aat.data.di.CommandProvider
 import com.fourall.aat.models.GenericCommand
 import com.fourall.aat.models.User
-import com.nhaarman.mockitokotlin2.*
-import org.junit.Assert.*
+import com.nhaarman.mockitokotlin2.argumentCaptor
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.times
+import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.whenever
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

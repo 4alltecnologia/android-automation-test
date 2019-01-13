@@ -1,4 +1,3 @@
 package com.fourall.aat.models
 
-abstract class GenericCommand {
-}
+abstract class GenericCommand
