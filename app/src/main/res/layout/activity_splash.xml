@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.SplashActivity">
+    android:background="@color/fourall_palette"
+    tools:context="com.fourall.aat.views.SplashActivity">
 
     <ImageView
-        android:id="@+id/ivSplashLogo"
+        android:id="@+id/fourallLogoImageView"
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:layout_marginStart="16dp"
@@ -15,31 +16,34 @@
         android:layout_marginEnd="16dp"
         android:contentDescription="@null"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/tvSplashMessage"
+        app:layout_constraintBottom_toTopOf="@+id/splashTitleDescriptionTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.40"
         app:layout_constraintVertical_chainStyle="packed"
-        app:srcCompat="@drawable/appium_logo"
+        app:srcCompat="@drawable/ic_fourall"
         tools:visibility="visible" />
 
     <TextView
-        android:id="@+id/tvSplashMessage"
+        android:id="@+id/splashTitleDescriptionTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="21dp"
         android:layout_marginBottom="16dp"
-        android:text="@string/splash_message"
+        android:text="@string/splash_title_description"
+        android:textColor="@color/white"
+        android:textStyle="bold"
         android:textAlignment="center"
         android:textSize="24sp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivSplashLogo"
+        app:layout_constraintTop_toBottomOf="@+id/fourallLogoImageView"
         tools:visibility="visible" />
+
 </android.support.constraint.ConstraintLayout>
