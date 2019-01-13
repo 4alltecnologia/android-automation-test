@@ -11,12 +11,13 @@ import com.fourall.aat.extensions.isKeyboardOpened
 import com.fourall.aat.models.User
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class InputActivity : AppCompatActivity() {
 
     private var nameIsOk = false
     private var ageIsOk = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
@@ -24,8 +25,11 @@ class MainActivity : AppCompatActivity() {
         title = getString(R.string.app_name)
 
         textInputEditTextName.addTextChangedListener(object : TextWatcher {
+
             override fun afterTextChanged(p0: Editable?) {
+
                 nameIsOk = p0?.isNotEmpty() ?: false
+
                 enableButtonNext(ageIsOk && nameIsOk)
                 enableButtonClean(nameIsOk || ageIsOk)
             }
@@ -38,8 +42,11 @@ class MainActivity : AppCompatActivity() {
         })
 
         textInputEditTextAge.addTextChangedListener(object : TextWatcher {
+
             override fun afterTextChanged(p0: Editable?) {
+
                 ageIsOk = p0?.isNotEmpty() ?: false
+
                 enableButtonNext(nameIsOk && ageIsOk)
                 enableButtonClean(nameIsOk || ageIsOk)
             }
@@ -52,6 +59,7 @@ class MainActivity : AppCompatActivity() {
         })
 
         btnOk.setOnClickListener {
+
             if (isKeyboardOpened()) closeKeyboard(currentFocus)
 
             val age = textInputEditTextAge.text.toString()
@@ -60,18 +68,23 @@ class MainActivity : AppCompatActivity() {
             val person = User(age, name)
 
             val intent = Intent(this, ResultActivity::class.java)
+
             intent.putExtra("person", person)
+
             startActivity(intent)
         }
 
         btnClean.setOnClickListener {
+
             textInputEditTextName.text.clear()
             textInputEditTextAge.text.clear()
         }
     }
 
     override fun onResume() {
+
         super.onResume()
+
         enableButtonNext(nameIsOk && ageIsOk)
         enableButtonClean(nameIsOk || ageIsOk)
     }

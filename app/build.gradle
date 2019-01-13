@@ -53,6 +53,7 @@ dependencies {
     implementation 'com.airbnb.android:lottie:2.6.0-beta19'
     ktlint "com.github.shyiko:ktlint:0.29.0"
 
+    testImplementation 'android.arch.core:core-testing:1.1.1'
     testImplementation 'junit:junit:4.12'
     testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.0.0-RC1'
 }

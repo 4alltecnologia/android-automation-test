@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name="com.fourall.aat.views.MainActivity" />
+        <activity android:name="com.fourall.aat.views.InputActivity" />
 
         <activity
             android:name="com.fourall.aat.views.SplashActivity"
