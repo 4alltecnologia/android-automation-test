@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.MenuItem
 import com.fourall.aat.R
-import com.fourall.aat.models.Person
+import com.fourall.aat.models.User
 import kotlinx.android.synthetic.main.activity_result.*
 
 class ResultActivity : AppCompatActivity() {
@@ -18,7 +18,7 @@ class ResultActivity : AppCompatActivity() {
         title = getString(R.string.app_name)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val person = intent.getParcelableExtra<Person>("person")
+        val person = intent.getParcelableExtra<User>("person")
 
         val textToDisplay = getString(R.string.your_name, person.name).plus(
             getString(

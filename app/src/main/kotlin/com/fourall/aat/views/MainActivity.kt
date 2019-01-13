@@ -8,7 +8,7 @@ import android.text.TextWatcher
 import com.fourall.aat.R
 import com.fourall.aat.extensions.closeKeyboard
 import com.fourall.aat.extensions.isKeyboardOpened
-import com.fourall.aat.models.Person
+import com.fourall.aat.models.User
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -54,10 +54,10 @@ class MainActivity : AppCompatActivity() {
         btnOk.setOnClickListener {
             if (isKeyboardOpened()) closeKeyboard(currentFocus)
 
-            val age = textInputEditTextAge.text.toString().toInt()
+            val age = textInputEditTextAge.text.toString()
             val name = textInputEditTextName.text.toString()
 
-            val person = Person(age, name)
+            val person = User(age, name)
 
             val intent = Intent(this, ResultActivity::class.java)
             intent.putExtra("person", person)
