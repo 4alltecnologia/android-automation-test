@@ -1,4 +1,4 @@
-package br.com.lucasbieniek.aat.extensions
+package com.fourall.aat.extensions
 
 import android.app.Activity
 import android.content.Context

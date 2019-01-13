@@ -1,14 +1,14 @@
-package br.com.lucasbieniek.aat.views
+package com.fourall.aat.views
 
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
-import br.com.lucasbieniek.aat.R
-import br.com.lucasbieniek.aat.extensions.closeKeyboard
-import br.com.lucasbieniek.aat.extensions.isKeyboardOpened
-import br.com.lucasbieniek.aat.models.Person
+import com.fourall.aat.R
+import com.fourall.aat.extensions.closeKeyboard
+import com.fourall.aat.extensions.isKeyboardOpened
+import com.fourall.aat.models.User
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -54,10 +54,10 @@ class MainActivity : AppCompatActivity() {
         btnOk.setOnClickListener {
             if (isKeyboardOpened()) closeKeyboard(currentFocus)
 
-            val age = textInputEditTextAge.text.toString().toInt()
+            val age = textInputEditTextAge.text.toString()
             val name = textInputEditTextName.text.toString()
 
-            val person = Person(age, name)
+            val person = User(age, name)
 
             val intent = Intent(this, ResultActivity::class.java)
             intent.putExtra("person", person)
@@ -83,5 +83,4 @@ class MainActivity : AppCompatActivity() {
     private fun enableButtonClean(enableButton: Boolean) {
         btnClean.isEnabled = enableButton
     }
-
 }
