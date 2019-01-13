@@ -9,5 +9,5 @@ jobs:
             name: Run Tests
             command: ./gradlew test
       - run:
-          name: Build debug APK
+          name: Build Project
           command: ./gradlew :app:assembleDebug
