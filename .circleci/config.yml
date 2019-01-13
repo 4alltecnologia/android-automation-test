@@ -1,0 +1,12 @@
+version: 2
+jobs:
+  test:
+    docker:
+      - image: circleci/android:api-27-alpha
+    steps:
+      - run:
+            name: Run Tests
+            command: ./gradlew test
+      - run:
+          name: Build debug APK
+          command: ./gradlew :app:assembleDebug
