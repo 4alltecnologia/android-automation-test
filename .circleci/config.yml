@@ -4,6 +4,7 @@ jobs:
     docker:
       - image: circleci/android:api-27-alpha
     steps:
+      - checkout
       - run:
             name: Run Tests
             command: ./gradlew test
