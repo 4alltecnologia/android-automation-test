@@ -18,9 +18,9 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-        ivSplashLogo.fadeVisibility(true)
+        fourallLogoImageView.fadeVisibility(true)
 
-        tvSplashMessage.fadeVisibility(true)
+        splashTitleDescriptionTextView.fadeVisibility(true)
 
         Handler().postDelayed({
 
