@@ -1,4 +1,4 @@
-package br.com.lucasbieniek.aat.models
+package com.fourall.aat.models
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

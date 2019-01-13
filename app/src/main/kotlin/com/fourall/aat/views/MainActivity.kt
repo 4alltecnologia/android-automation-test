@@ -1,14 +1,14 @@
-package br.com.lucasbieniek.aat.views
+package com.fourall.aat.views
 
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
-import br.com.lucasbieniek.aat.R
-import br.com.lucasbieniek.aat.extensions.closeKeyboard
-import br.com.lucasbieniek.aat.extensions.isKeyboardOpened
-import br.com.lucasbieniek.aat.models.Person
+import com.fourall.aat.R
+import com.fourall.aat.extensions.closeKeyboard
+import com.fourall.aat.extensions.isKeyboardOpened
+import com.fourall.aat.models.Person
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
