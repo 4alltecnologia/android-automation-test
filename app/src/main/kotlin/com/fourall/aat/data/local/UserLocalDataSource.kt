@@ -12,4 +12,8 @@ class UserLocalDataSource(private val userDAO: UserDAO) : UserDataContract.Local
     override fun getUserById(id: Int): User {
         return userDAO.getUserById(id)
     }
+
+    override fun getUser(): User {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 }

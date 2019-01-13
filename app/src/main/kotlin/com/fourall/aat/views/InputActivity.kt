@@ -92,7 +92,7 @@ class InputActivity : BaseActivity() {
             val age = userAgeTextInputEditText.text.toString()
             val name = userNameTextInputEditText.text.toString()
 
-            val person = User(age, name)
+            val person = User(age = age, name = name)
 
             val intent = Intent(this, ResultActivity::class.java)
 

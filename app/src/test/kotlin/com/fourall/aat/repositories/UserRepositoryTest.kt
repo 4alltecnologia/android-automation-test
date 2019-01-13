@@ -31,7 +31,7 @@ class UserRepositoryTest {
         val EXPECTED_USER_NAME = "Zé Renato"
         val EXPECTED_USER_AGE = "45"
 
-        val expectedUser = User(EXPECTED_USER_NAME, EXPECTED_USER_AGE)
+        val expectedUser = User(name = EXPECTED_USER_NAME, age = EXPECTED_USER_AGE)
 
         whenever(userLocalDataSourceMock.getUser()).thenReturn(expectedUser)
 
