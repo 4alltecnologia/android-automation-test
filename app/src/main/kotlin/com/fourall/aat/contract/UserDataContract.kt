@@ -4,7 +4,9 @@ interface UserDataContract {
 
     interface Local {
 
-        fun saveUser(name: String,
-                     age: String)
+        fun saveUser(
+            name: String,
+            age: String
+        )
     }
 }

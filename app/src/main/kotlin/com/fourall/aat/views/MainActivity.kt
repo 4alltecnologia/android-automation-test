@@ -83,5 +83,4 @@ class MainActivity : AppCompatActivity() {
     private fun enableButtonClean(enableButton: Boolean) {
         btnClean.isEnabled = enableButton
     }
-
 }
