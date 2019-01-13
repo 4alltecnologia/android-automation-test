@@ -13,6 +13,8 @@ interface UserDataContract {
 
     interface Local {
 
+        fun getUser(): User
+
         fun saveUser(
             name: String,
             age: String
