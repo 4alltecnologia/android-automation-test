@@ -6,7 +6,6 @@ import com.fourall.aat.models.User
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.whenever
 import org.junit.Before
 import org.junit.Test
 
@@ -19,6 +18,8 @@ class UserRepositoryTest {
     @Before fun setUp() {
 
         userLocalDataSourceMock = mock()
+
+        userRepository = UserDataRepository(userLocalDataSourceMock)
     }
 
     @Test fun `Save user, when it is requested to save user, then verify user is saved locally`() {
