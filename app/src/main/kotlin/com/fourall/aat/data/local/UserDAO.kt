@@ -9,9 +9,9 @@ import com.fourall.aat.models.User
 interface UserDAO {
 
     @Insert
-    fun saveUser(user: User)
+    fun saveUser(user: User): Long
 
-    @Query("SELECT * FROM user LIMIT 1")
-    fun getUser(): User
+    @Query("SELECT * FROM user WHERE user.id = :id LIMIT 1")
+    fun getUserById(id: Long): User?
 
 }

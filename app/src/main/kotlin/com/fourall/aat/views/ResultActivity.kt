@@ -4,11 +4,20 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.MenuItem
+import com.fourall.aat.Application
 import com.fourall.aat.R
+import com.fourall.aat.contract.repositories.UserRepository
+import com.fourall.aat.data.local.UserLocalDataSource
 import com.fourall.aat.models.User
+import com.fourall.aat.repositories.UserDataRepository
 import kotlinx.android.synthetic.main.activity_result.*
+import kotlinx.coroutines.*
 
 class ResultActivity : AppCompatActivity() {
+
+    private val userRepository: UserRepository by lazy {
+        UserDataRepository(UserLocalDataSource(Application.database?.userDao()!!))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,18 +27,32 @@ class ResultActivity : AppCompatActivity() {
         title = getString(R.string.app_name)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val person = intent.getParcelableExtra<User>("person")
+        val userId = intent.getLongExtra("id", 0)
 
-        val textToDisplay = getString(R.string.your_name, person.name).plus(
-            getString(
-                R.string.your_age,
-                person.age.toString()
-            )
-        )
+        GlobalScope.launch {
 
-        tvResult.text = textToDisplay
+            val user = withContext(Dispatchers.Default) {
+                userRepository.getUserById(userId)
+            }
 
-        Handler().post { lottieAnimationResult.playAnimation() }
+            val textToDisplay = if (user != null) {
+                getString(R.string.your_name, user.name).plus(
+                    getString(
+                        R.string.your_age,
+                        user.age
+                    )
+                )
+            } else {
+                getString(R.string.user_not_found)
+            }
+
+            tvResult.text = textToDisplay
+
+            launch(Dispatchers.Main) {
+
+                Handler().post { lottieAnimationResult.playAnimation() }
+            }
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

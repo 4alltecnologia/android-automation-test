@@ -6,10 +6,10 @@ import com.fourall.aat.models.User
 
 class UserDataRepository(private val userLocalDataSource: UserDataContract.Local) : UserRepository {
 
-    override fun getUser(): User = userLocalDataSource.getUser()
+    override fun getUserById(id: Long): User? = userLocalDataSource.getUserById(id)
 
-    override fun saveUser(name: String, age: String) {
+    override fun saveUser(name: String, age: String): Long {
 
-        userLocalDataSource.saveUser(name, age)
+        return userLocalDataSource.saveUser(name, age)
     }
 }

@@ -6,12 +6,14 @@
     <string name="hint_age">Idade</string>
     <string name="hint_name">Nome</string>
 
-    <string name="ok">OK</string>
+    <string name="save">Salvar</string>
     <string name="clean">Limpar campos</string>
 
     <string name="your_name">Seu nome é %s</string>
     <string name="your_age">\u0020e você tem %s anos!</string>
 
     <string name="splash_title_description">4All - Workshop de Testes Unitários para Desenvolvedores Android</string>
+
+    <string name="user_not_found">Usuário não encontrado.</string>
 
 </resources>

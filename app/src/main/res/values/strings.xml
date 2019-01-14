@@ -6,12 +6,14 @@
     <string name="hint_age">Age</string>
     <string name="hint_name">Name</string>
 
-    <string name="ok">OK</string>
+    <string name="save">Save</string>
     <string name="clean">Clean fields</string>
 
     <string name="your_name">Your name is %s</string>
     <string name="your_age">\u0020and you are %s years old!</string>
 
     <string name="splash_title_description">4All - Unit Testing Workshop for Android Developers</string>
+
+    <string name="user_not_found">User not found.</string>
 
 </resources>
