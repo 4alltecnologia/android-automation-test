@@ -7,7 +7,7 @@ import com.fourall.aat.data.local.AppDataBase
 class Application : Application() {
 
     companion object {
-        var database: AppDataBase? = null
+        lateinit var database: AppDataBase
     }
 
     override fun onCreate() {
