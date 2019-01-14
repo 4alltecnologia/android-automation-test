@@ -4,20 +4,13 @@ import com.fourall.aat.models.User
 
 interface UserDataContract {
 
-    interface ResultCallback<in T> {
-
-        fun onLoaded(result: T)
-
-        fun onDataNotAvailable()
-    }
-
     interface Local {
 
-        fun getUser(): User
+        fun getUserById(id: Long): User?
 
         fun saveUser(
             name: String,
             age: String
-        )
+        ): Long
     }
 }
