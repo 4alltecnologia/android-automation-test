@@ -5,11 +5,8 @@ import com.fourall.aat.contract.repositories.UserRepository
 import com.fourall.aat.data.di.CommandProvider
 import com.fourall.aat.models.GenericCommand
 import com.fourall.aat.models.User
-import com.nhaarman.mockitokotlin2.argumentCaptor
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.times
-import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.whenever
+import com.nhaarman.mockitokotlin2.*
+import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
@@ -22,11 +19,14 @@ class InputViewModelTest {
 
     private lateinit var commandMock: SingleLiveEvent<GenericCommand>
 
-    @JvmField @Rule val instantTaskExecutorRule = InstantTaskExecutorRule()
+    @JvmField
+    @Rule
+    val instantTaskExecutorRule = InstantTaskExecutorRule()
 
     private lateinit var inputViewModel: InputViewModel
 
-    @Before fun setUp() {
+    @Before
+    fun setUp() {
 
         userRepositoryMock = mock()
         commandProviderMock = mock()
@@ -38,28 +38,31 @@ class InputViewModelTest {
         inputViewModel = InputViewModel(userRepositoryMock, commandProviderMock)
     }
 
-    @Test fun `Load user, when it is requested to load user, then shows user info`() {
+    @Test
+    fun `Load user, when it is requested to load user, then shows user info`() {
 
         // ARRANGE
 
         val EXPECTED_USER_NAME = "Zé Renato"
         val EXPECTED_USER_AGE = "45"
 
-        val expectedUser = User(name = EXPECTED_USER_NAME, age = EXPECTED_USER_AGE)
+        val expectedUser = User(1L, EXPECTED_USER_NAME, EXPECTED_USER_AGE)
 
         val EXPECTED_COMMAND = InputViewModel.Command.ShowUserInfo(expectedUser)
 
         val commandCaptor = argumentCaptor<InputViewModel.Command.ShowUserInfo>()
 
-        whenever(userRepositoryMock.getUser()).thenReturn(expectedUser)
+        whenever(userRepositoryMock.getUserById(1L)).thenReturn(expectedUser)
 
         // ACT
 
-        inputViewModel.loadUser()
+        runBlocking {
+            inputViewModel.loadUserById(1L)
+        }
 
         // ASSERT
 
-        verify(commandMock, times(1)).setValue(commandCaptor.capture())
+        verify(commandMock, times(1)).value = commandCaptor.capture()
 
         assertEquals(EXPECTED_COMMAND.user, commandCaptor.firstValue.user)
     }

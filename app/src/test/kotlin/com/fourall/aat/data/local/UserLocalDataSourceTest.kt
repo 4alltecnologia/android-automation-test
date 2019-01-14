@@ -6,8 +6,7 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
-import org.junit.Assert
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 
@@ -17,39 +16,42 @@ class UserLocalDataSourceTest {
 
     private lateinit var userLocalDataSource: UserDataContract.Local
 
-    @Before fun setUp() {
+    @Before
+    fun setUp() {
 
         userDAOMock = mock()
 
         userLocalDataSource = UserLocalDataSource(userDAOMock)
     }
 
-    @Test fun `Get user, when it is requested to get user, then returns user successfully`() {
+    @Test
+    fun `Get user, when it is requested to get user, then returns user successfully`() {
 
         // ARRANGE
 
-        val EXPECTED_USER_ID = 1
+        val EXPECTED_USER_ID = 1L
         val EXPECTED_USER_NAME = "Zé Renato"
         val EXPECTED_USER_AGE = "45"
 
         val expectedUser = User(
-                id = EXPECTED_USER_ID,
-                name = EXPECTED_USER_NAME,
-                age = EXPECTED_USER_AGE
+            id = EXPECTED_USER_ID,
+            name = EXPECTED_USER_NAME,
+            age = EXPECTED_USER_AGE
         )
 
-        whenever(userDAOMock.getUser()).thenReturn(expectedUser)
+        whenever(userDAOMock.getUserById(1)).thenReturn(expectedUser)
 
         // ACT
 
-        val user = userLocalDataSource.getUser()
+        val user = userLocalDataSource.getUserById(1L)
 
         // ASSERT
 
         assertEquals(expectedUser, user)
     }
 
-    @Test fun `Save user, when it is passed user name and user age, then verify user is saved locally`() {
+    @Test
+    fun `Save user, when it is passed user name and user age, then verify user is saved locally`() {
 
         // ARRANGE
 

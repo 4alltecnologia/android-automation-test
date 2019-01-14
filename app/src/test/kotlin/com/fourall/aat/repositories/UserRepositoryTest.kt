@@ -17,34 +17,37 @@ class UserRepositoryTest {
 
     private lateinit var userRepository: UserRepository
 
-    @Before fun setUp() {
+    @Before
+    fun setUp() {
 
         userLocalDataSourceMock = mock()
 
         userRepository = UserDataRepository(userLocalDataSourceMock)
     }
 
-    @Test fun `Get user, when it is requested to get user, then returns user successfully`() {
+    @Test
+    fun `Get user, when it is requested to get user, then returns user successfully`() {
 
         // ARRANGE
 
         val EXPECTED_USER_NAME = "Zé Renato"
         val EXPECTED_USER_AGE = "45"
 
-        val expectedUser = User(name = EXPECTED_USER_NAME, age = EXPECTED_USER_AGE)
+        val expectedUser = User(1L, EXPECTED_USER_NAME, EXPECTED_USER_AGE)
 
-        whenever(userLocalDataSourceMock.getUser()).thenReturn(expectedUser)
+        whenever(userLocalDataSourceMock.getUserById(1L)).thenReturn(expectedUser)
 
         // ACT
 
-        val user = userRepository.getUser()
+        val user = userRepository.getUserById(1L)
 
         // ASSERT
 
         assertEquals(expectedUser, user)
     }
 
-    @Test fun `Save user, when it is passed user name and user age, then verify user is saved locally`() {
+    @Test
+    fun `Save user, when it is passed user name and user age, then verify user is saved locally`() {
 
         // ARRANGE
 
