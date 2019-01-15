@@ -30,7 +30,8 @@ class InputViewModel(
 
                 userRepository.getUserById(id)
             }
-            command.value = Command.ShowUserInfo(savedUser)
+
+            command.postValue(Command.ShowUserInfo(savedUser))
         }
     }
 
@@ -42,7 +43,7 @@ class InputViewModel(
                 userRepository.saveUser(name, age)
             }
 
-            command.value = Command.UserSaved(createdId)
+            command.postValue(Command.UserSaved(createdId))
         }
     }
 }

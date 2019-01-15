@@ -62,7 +62,7 @@ class InputViewModelTest {
 
         // ASSERT
 
-        verify(commandMock, times(1)).value = commandCaptor.capture()
+        verify(commandMock, times(1)).postValue(commandCaptor.capture())
 
         assertEquals(EXPECTED_COMMAND.user, commandCaptor.firstValue.user)
     }
