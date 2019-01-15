@@ -8,15 +8,17 @@ import com.fourall.aat.Application
 import com.fourall.aat.R
 import com.fourall.aat.contract.repositories.UserRepository
 import com.fourall.aat.data.local.UserLocalDataSource
-import com.fourall.aat.models.User
 import com.fourall.aat.repositories.UserDataRepository
 import kotlinx.android.synthetic.main.activity_result.*
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ResultActivity : AppCompatActivity() {
 
     private val userRepository: UserRepository by lazy {
-        UserDataRepository(UserLocalDataSource(Application.database?.userDao()!!))
+        UserDataRepository(UserLocalDataSource(Application.database.userDao()))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

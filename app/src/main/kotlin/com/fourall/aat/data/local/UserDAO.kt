@@ -13,5 +13,4 @@ interface UserDAO {
 
     @Query("SELECT * FROM user WHERE user.id = :id LIMIT 1")
     fun getUserById(id: Long): User?
-
 }
