@@ -6,11 +6,11 @@ interface UserDataContract {
 
     interface Local {
 
-        fun getUser(): User
+        fun getUserById(id: Long): User?
 
         fun saveUser(
             name: String,
             age: String
-        )
+        ): Long
     }
 }

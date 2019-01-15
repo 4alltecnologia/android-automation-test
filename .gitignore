@@ -21,6 +21,9 @@ out/
 .gradle/
 build/
 
+# Room schemas
+*/schemas/
+
 # Local configuration file (sdk path, etc)
 local.properties
 

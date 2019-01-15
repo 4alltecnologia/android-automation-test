@@ -5,22 +5,45 @@ import com.fourall.aat.contract.repositories.UserRepository
 import com.fourall.aat.data.di.CommandProvider
 import com.fourall.aat.models.GenericCommand
 import com.fourall.aat.models.User
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class InputViewModel(
     private val userRepository: UserRepository,
-    private val commandProvider: CommandProvider
+    commandProvider: CommandProvider
 ) : ViewModel() {
 
     val command: SingleLiveEvent<GenericCommand> = commandProvider.getCommand()
 
     sealed class Command : GenericCommand() {
-        class ShowUserInfo(val user: User) : Command()
+        class ShowUserInfo(val user: User?) : Command()
+        class UserSaved(val id: Long) : Command()
     }
 
-    fun loadUser() {
+    fun loadUserById(id: Long) {
 
-        val savedUser = userRepository.getUser()
+        GlobalScope.launch {
 
-        command.setValue(Command.ShowUserInfo(savedUser))
+            val savedUser = withContext(Dispatchers.Default) {
+
+                userRepository.getUserById(id)
+            }
+
+            command.postValue(Command.ShowUserInfo(savedUser))
+        }
+    }
+
+    fun saveUser(name: String, age: String) {
+
+        GlobalScope.launch {
+
+            val createdId = withContext(Dispatchers.Default) {
+                userRepository.saveUser(name, age)
+            }
+
+            command.postValue(Command.UserSaved(createdId))
+        }
     }
 }

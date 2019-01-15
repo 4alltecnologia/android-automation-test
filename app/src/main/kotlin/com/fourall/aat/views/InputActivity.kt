@@ -1,18 +1,24 @@
 package com.fourall.aat.views
 
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
+import com.fourall.aat.Application
 import com.fourall.aat.R
+import com.fourall.aat.data.di.CommandInjector
+import com.fourall.aat.data.local.UserLocalDataSource
 import com.fourall.aat.databinding.ActivityInputBinding
 import com.fourall.aat.extensions.closeKeyboard
 import com.fourall.aat.extensions.isKeyboardOpened
 import com.fourall.aat.models.GenericCommand
-import com.fourall.aat.models.User
+import com.fourall.aat.repositories.UserDataRepository
 import com.fourall.aat.viewmodels.InputViewModel
+import com.fourall.aat.viewmodels.factory.InputViewModelFactory
 import kotlinx.android.synthetic.main.activity_input.*
 
 class InputActivity : BaseActivity() {
@@ -22,6 +28,7 @@ class InputActivity : BaseActivity() {
 
     private var nameIsOk = false
     private var ageIsOk = false
+    private var userId = 0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -36,7 +43,8 @@ class InputActivity : BaseActivity() {
 
         super.onResume()
 
-        inputViewModel.loadUser()
+        progressBar.visibility = View.VISIBLE
+        inputViewModel.loadUserById(1)
 
         enableButtonNext(nameIsOk && ageIsOk)
         enableButtonClean(nameIsOk || ageIsOk)
@@ -85,24 +93,21 @@ class InputActivity : BaseActivity() {
             }
         })
 
-        okButton.setOnClickListener {
+        saveButton.setOnClickListener {
 
             if (isKeyboardOpened()) closeKeyboard(currentFocus)
 
             val age = userAgeTextInputEditText.text.toString()
             val name = userNameTextInputEditText.text.toString()
 
-            val person = User(age, name)
+            progressBar.visibility = View.VISIBLE
 
-            val intent = Intent(this, ResultActivity::class.java)
-
-            intent.putExtra("person", person)
-
-            startActivity(intent)
+            inputViewModel.saveUser(name, age)
         }
 
         cleanButton.setOnClickListener {
 
+            userId = 0
             userNameTextInputEditText.text?.clear()
             userAgeTextInputEditText.text?.clear()
         }
@@ -110,10 +115,12 @@ class InputActivity : BaseActivity() {
 
     private fun prepareViewModel() {
 
-        // val inputViewModelFactory = InputViewModelFactory(UserDataRepository())
+        val userRepository = UserDataRepository(UserLocalDataSource(Application.database.userDao()))
 
-        /*inputViewModel = ViewModelProviders.of(this, inputViewModelFactory)
-                .get(InputViewModel::class.java)*/
+        val inputViewModelFactory = InputViewModelFactory(userRepository, CommandInjector)
+
+        inputViewModel = ViewModelProviders.of(this, inputViewModelFactory)
+            .get(InputViewModel::class.java)
 
         inputViewModel.apply {
 
@@ -128,18 +135,33 @@ class InputActivity : BaseActivity() {
 
     private fun triggerCommand(command: GenericCommand) {
 
+        progressBar.visibility = View.GONE
+
         when (command) {
 
             is InputViewModel.Command.ShowUserInfo -> {
 
-                userNameTextInputEditText.setText(command.user.name)
-                userAgeTextInputEditText.setText(command.user.age)
+                command.user?.let {
+                    userId = it.id
+                    userNameTextInputEditText.setText(it.name)
+                    userAgeTextInputEditText.setText(it.age)
+                }
+            }
+
+            is InputViewModel.Command.UserSaved -> {
+                userId = command.id
+
+                val intent = Intent(this@InputActivity, ResultActivity::class.java)
+
+                intent.putExtra("id", userId)
+
+                startActivity(intent)
             }
         }
     }
 
     private fun enableButtonNext(enableButton: Boolean) {
-        okButton.isEnabled = enableButton
+        saveButton.isEnabled = enableButton
     }
 
     private fun enableButtonClean(enableButton: Boolean) {
