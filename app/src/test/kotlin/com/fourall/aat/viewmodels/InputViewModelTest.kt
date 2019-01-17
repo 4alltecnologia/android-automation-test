@@ -47,21 +47,22 @@ class InputViewModelTest {
 
         // ARRANGE
 
+        val EXPECTED_USER_ID = 1L
         val EXPECTED_USER_NAME = "Zé Renato"
         val EXPECTED_USER_AGE = "45"
 
-        val expectedUser = User(1L, EXPECTED_USER_NAME, EXPECTED_USER_AGE)
+        val expectedUser = User(EXPECTED_USER_ID, EXPECTED_USER_NAME, EXPECTED_USER_AGE)
 
         val EXPECTED_COMMAND = InputViewModel.Command.ShowUserInfo(expectedUser)
 
         val commandCaptor = argumentCaptor<InputViewModel.Command.ShowUserInfo>()
 
-        whenever(userRepositoryMock.getUserById(1L)).thenReturn(expectedUser)
+        whenever(userRepositoryMock.getUserById(EXPECTED_USER_ID)).thenReturn(expectedUser)
 
         // ACT
 
         runBlocking {
-            inputViewModel.loadUserById(1L)
+            inputViewModel.loadUserById(EXPECTED_USER_ID)
         }
 
         // ASSERT

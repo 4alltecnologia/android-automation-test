@@ -11,10 +11,11 @@ import kotlinx.android.synthetic.main.activity_splash.*
 class SplashActivity : AppCompatActivity() {
 
     companion object {
-        const val splashTime = 2000L
+        const val SPLASH_TIME_IN_MILLISECONDS = 2000L
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
@@ -24,9 +25,12 @@ class SplashActivity : AppCompatActivity() {
 
         Handler().postDelayed({
 
-            val intent = Intent(this, InputActivity::class.java)
+            val intent = Intent(this, UsersActivity::class.java)
+
             startActivity(intent)
+
             finish()
-        }, splashTime)
+
+        }, SPLASH_TIME_IN_MILLISECONDS)
     }
 }

@@ -6,6 +6,8 @@ interface UserDataContract {
 
     interface Local {
 
+        fun getUsers(): List<User>
+
         fun getUserById(id: Long): User?
 
         fun saveUser(

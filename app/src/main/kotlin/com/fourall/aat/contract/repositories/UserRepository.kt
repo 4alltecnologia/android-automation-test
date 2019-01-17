@@ -4,6 +4,8 @@ import com.fourall.aat.models.User
 
 interface UserRepository {
 
+    fun getUsers(): List<User>
+
     fun getUserById(id: Long): User?
 
     fun saveUser(

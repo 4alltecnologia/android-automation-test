@@ -91,10 +91,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/saveButton"
-            app:layout_constraintTop_toTopOf="@+id/saveButton" />
+            app:layout_constraintTop_toTopOf="@+id/saveButton"/>
 
         <ProgressBar
-            android:id="@+id/progressBar"
+            android:id="@+id/saveUserProgressBar"
             style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

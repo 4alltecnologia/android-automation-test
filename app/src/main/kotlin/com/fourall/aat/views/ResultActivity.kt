@@ -22,11 +22,12 @@ class ResultActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result)
 
-        // toolbar title
         title = getString(R.string.app_name)
+
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val userId = intent.getLongExtra("id", 0)
@@ -58,9 +59,18 @@ class ResultActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+
         if (item?.itemId == android.R.id.home) {
             onBackPressed()
         }
+
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun finish() {
+
+        setResult(RESULT_OK)
+
+        super.finish()
     }
 }
