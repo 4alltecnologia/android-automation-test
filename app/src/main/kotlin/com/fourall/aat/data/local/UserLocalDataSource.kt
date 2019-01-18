@@ -11,4 +11,9 @@ class UserLocalDataSource(private val userDAO: UserDAO) : UserDataContract.Local
 
     override fun saveUser(name: String, age: String): Long =
             userDAO.saveUser(User(name = name, age = age))
+
+    override fun saveUserById(id: Long,
+                              name: String,
+                              age: String): Long =
+            userDAO.saveUser(User(id, name, age))
 }

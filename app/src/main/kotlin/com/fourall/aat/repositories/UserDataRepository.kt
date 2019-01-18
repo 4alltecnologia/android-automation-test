@@ -11,4 +11,7 @@ class UserDataRepository(private val userLocalDataSource: UserDataContract.Local
     override fun getUserById(id: Long): User? = userLocalDataSource.getUserById(id)
 
     override fun saveUser(name: String, age: String): Long = userLocalDataSource.saveUser(name, age)
+
+    override fun saveUserById(id: Long, name: String, age: String): Long =
+            userLocalDataSource.saveUserById(id, name, age)
 }

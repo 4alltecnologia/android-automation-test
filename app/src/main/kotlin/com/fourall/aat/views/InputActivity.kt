@@ -134,12 +134,17 @@ class InputActivity : BaseActivity() {
             val age = userAgeTextInputEditText.text.toString()
             val name = userNameTextInputEditText.text.toString()
 
-            inputViewModel.saveUser(name, age)
+            if (userId == 0L) {
+                inputViewModel.saveUser(name, age)
+            } else {
+                inputViewModel.saveUserById(userId, name, age)
+            }
         }
 
         cleanButton.setOnClickListener {
 
             userId = 0
+
             userNameTextInputEditText.text?.clear()
             userAgeTextInputEditText.text?.clear()
         }

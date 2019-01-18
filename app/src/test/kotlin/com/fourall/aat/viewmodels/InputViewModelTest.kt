@@ -57,11 +57,12 @@ class InputViewModelTest {
 
         val commandCaptor = argumentCaptor<InputViewModel.Command.ShowUserInfo>()
 
-        whenever(userRepositoryMock.getUserById(EXPECTED_USER_ID)).thenReturn(expectedUser)
-
         // ACT
 
         runBlocking {
+
+            whenever(userRepositoryMock.getUserById(EXPECTED_USER_ID)).thenReturn(expectedUser)
+
             inputViewModel.loadUserById(EXPECTED_USER_ID)
         }
 

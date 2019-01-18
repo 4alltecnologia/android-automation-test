@@ -62,5 +62,23 @@ class InputViewModel(
         }
     }
 
+    fun saveUserById(id: Long,
+                     name: String,
+                     age: String) {
+
+        viewState.setValue(currentViewState().copy(isSavingUser = true))
+
+        GlobalScope.launch {
+
+            val updatedId = withContext(Dispatchers.Default) {
+                userRepository.saveUserById(id, name, age)
+            }
+
+            viewState.postValue(currentViewState().copy(isSavingUser = false))
+
+            command.postValue(Command.ShowSavedUserMessage(updatedId))
+        }
+    }
+
     private fun currentViewState(): ViewState = viewState.value!!
 }

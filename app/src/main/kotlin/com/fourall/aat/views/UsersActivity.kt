@@ -1,5 +1,6 @@
 package com.fourall.aat.views
 
+import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
@@ -26,7 +27,18 @@ class UsersActivity : BaseActivity() {
     private lateinit var activityUsersBinding: ActivityUsersBinding
     private lateinit var usersViewModel: UsersViewModel
 
-    private lateinit var usersAdapter: UsersAdapter
+    private var usersAdapter: UsersAdapter = UsersAdapter(mutableListOf(), this) { position ->
+
+        val user = (usersViewModel.command as UsersViewModel.Command.ShowUsers).users[position]
+
+        val inputIntent = Intent(this, InputActivity::class.java)
+
+        inputIntent.putExtra(InputActivity.ARG_USER_ID, user.id)
+        inputIntent.putExtra(InputActivity.ARG_USER_NAME, user.name)
+        inputIntent.putExtra(InputActivity.ARG_USER_AGE, user.age)
+
+        startActivity(inputIntent)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -48,6 +60,15 @@ class UsersActivity : BaseActivity() {
         activityUsersBinding = DataBindingUtil.setContentView(this, R.layout.activity_users)
 
         title = getString(R.string.app_name)
+
+        val linearLayoutManager = LinearLayoutManager(this)
+
+        val dividerItemDecoration = DividerItemDecoration(
+                usersRecyclerView.context, linearLayoutManager.orientation)
+
+        usersRecyclerView.addItemDecoration(dividerItemDecoration)
+        usersRecyclerView.layoutManager = linearLayoutManager
+        usersRecyclerView.adapter = usersAdapter
     }
 
     private fun prepareViewModel() {
@@ -106,27 +127,7 @@ class UsersActivity : BaseActivity() {
 
                     noUsersTextView.visibility = View.GONE
 
-                    usersAdapter = UsersAdapter(command.users, this) { position ->
-
-                        val user = command.users[position]
-
-                        val inputIntent = Intent(this, InputActivity::class.java)
-
-                        inputIntent.putExtra(InputActivity.ARG_USER_ID, user.id)
-                        inputIntent.putExtra(InputActivity.ARG_USER_NAME, user.name)
-                        inputIntent.putExtra(InputActivity.ARG_USER_AGE, user.age)
-
-                        startActivity(inputIntent)
-                    }
-
-                    val linearLayoutManager = LinearLayoutManager(this)
-
-                    val dividerItemDecoration = DividerItemDecoration(
-                            usersRecyclerView.context, linearLayoutManager.orientation)
-
-                    usersRecyclerView.addItemDecoration(dividerItemDecoration)
-                    usersRecyclerView.layoutManager = linearLayoutManager
-                    usersRecyclerView.adapter = usersAdapter
+                    usersAdapter.updateUsers(command.users)
 
                 } else {
 

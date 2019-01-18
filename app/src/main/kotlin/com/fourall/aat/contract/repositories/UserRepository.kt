@@ -12,4 +12,10 @@ interface UserRepository {
         name: String,
         age: String
     ): Long
+
+    fun saveUserById(
+            id: Long,
+            name: String,
+            age: String
+    ): Long
 }
