@@ -6,8 +6,9 @@ import com.fourall.aat.contract.repositories.UserRepository
 import com.fourall.aat.data.di.CommandProvider
 import com.fourall.aat.viewmodels.ResultViewModel
 
-class ResultViewModelFactory(private val userRepository: UserRepository,
-                             private val commandProvider: CommandProvider
+class ResultViewModelFactory(
+    private val userRepository: UserRepository,
+    private val commandProvider: CommandProvider
 ) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")

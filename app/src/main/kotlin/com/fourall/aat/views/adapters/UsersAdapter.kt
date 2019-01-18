@@ -11,9 +11,9 @@ import com.fourall.aat.models.User
 import kotlinx.android.synthetic.main.user_item.view.*
 
 class UsersAdapter(
-        private var users: MutableList<User>,
-        private val context: Context,
-        private val itemClickListener: (Int) -> Unit
+    private var users: List<User>,
+    private val context: Context,
+    private val itemClickListener: (Int) -> Unit
 ) : RecyclerView.Adapter<UsersAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
@@ -32,14 +32,6 @@ class UsersAdapter(
         holder.userItemView.setOnClickListener {
             itemClickListener(position)
         }
-    }
-
-    fun updateUsers(updatedUsers: List<User>) {
-
-        users.clear()
-        users.addAll(updatedUsers)
-
-        notifyDataSetChanged()
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {

@@ -30,7 +30,6 @@ class SplashActivity : AppCompatActivity() {
             startActivity(intent)
 
             finish()
-
         }, SPLASH_TIME_IN_MILLISECONDS)
     }
 }
