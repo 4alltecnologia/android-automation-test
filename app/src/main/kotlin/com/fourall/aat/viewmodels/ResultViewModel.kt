@@ -25,7 +25,7 @@ class ResultViewModel(
 
         GlobalScope.launch {
 
-            val user = withContext(Dispatchers.Default) {
+            val user = withContext(Dispatchers.IO) {
                 userRepository.getUserById(id)
             }
 
