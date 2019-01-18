@@ -12,15 +12,15 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class UsersViewModel(
-        private val userRepository: UserRepository,
-        private val commandProvider: CommandProvider
+    private val userRepository: UserRepository,
+    private val commandProvider: CommandProvider
 ) : ViewModel() {
 
     val command: SingleLiveEvent<GenericCommand> = commandProvider.getCommand()
     val viewState: MutableLiveData<ViewState> = MutableLiveData()
 
     data class ViewState(
-            val isLoadingUsers: Boolean = false
+        val isLoadingUsers: Boolean = false
     )
 
     sealed class Command : GenericCommand() {

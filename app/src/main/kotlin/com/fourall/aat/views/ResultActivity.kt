@@ -4,7 +4,6 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
 import android.view.MenuItem
 import com.fourall.aat.Application
 import com.fourall.aat.R
@@ -17,10 +16,6 @@ import com.fourall.aat.repositories.UserDataRepository
 import com.fourall.aat.viewmodels.ResultViewModel
 import com.fourall.aat.viewmodels.factory.ResultViewModelFactory
 import kotlinx.android.synthetic.main.activity_result.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class ResultActivity : AppCompatActivity() {
 

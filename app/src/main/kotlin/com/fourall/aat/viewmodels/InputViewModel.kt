@@ -20,7 +20,7 @@ class InputViewModel(
     val viewState: MutableLiveData<ViewState> = MutableLiveData()
 
     data class ViewState(
-            val isSavingUser: Boolean = false
+        val isSavingUser: Boolean = false
     )
 
     sealed class Command : GenericCommand() {
@@ -62,9 +62,11 @@ class InputViewModel(
         }
     }
 
-    fun saveUserById(id: Long,
-                     name: String,
-                     age: String) {
+    fun saveUserById(
+        id: Long,
+        name: String,
+        age: String
+    ) {
 
         viewState.setValue(currentViewState().copy(isSavingUser = true))
 

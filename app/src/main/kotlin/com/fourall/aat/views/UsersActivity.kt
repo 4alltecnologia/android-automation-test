@@ -1,6 +1,5 @@
 package com.fourall.aat.views
 
-import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
@@ -12,7 +11,6 @@ import android.view.View
 import com.fourall.aat.Application
 import com.fourall.aat.R
 import com.fourall.aat.data.di.CommandInjector
-import com.fourall.aat.data.local.UserDAO
 import com.fourall.aat.data.local.UserLocalDataSource
 import com.fourall.aat.databinding.ActivityUsersBinding
 import com.fourall.aat.models.GenericCommand
@@ -128,7 +126,6 @@ class UsersActivity : BaseActivity() {
                     usersRecyclerView.addItemDecoration(dividerItemDecoration)
                     usersRecyclerView.layoutManager = linearLayoutManager
                     usersRecyclerView.adapter = usersAdapter
-
                 } else {
 
                     usersRecyclerView.visibility = View.GONE
