@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/bienieklucas/android-automation-test.svg?style=svg)](https://circleci.com/gh/bienieklucas/android-automation-test)
+[![CircleCI](https://circleci.com/gh/4alltecnologia/android-automation-test/tree/master.svg?style=svg)](https://circleci.com/gh/4alltecnologia/android-automation-test/tree/master)
 
 # 4All - Unit Testing Workshop for Android Developers
 
