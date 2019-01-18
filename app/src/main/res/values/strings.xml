@@ -15,5 +15,7 @@
     <string name="splash_title_description">4All - Unit Testing Workshop for Android Developers</string>
 
     <string name="user_not_found">User not found.</string>
+    
+    <string name="no_registered_users_yet">There are no registered users yet</string>
 
 </resources>

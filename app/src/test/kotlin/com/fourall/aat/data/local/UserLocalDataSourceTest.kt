@@ -7,6 +7,7 @@ import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
 import org.junit.Before
 import org.junit.Test
 
@@ -24,8 +25,57 @@ class UserLocalDataSourceTest {
         userLocalDataSource = UserLocalDataSource(userDAOMock)
     }
 
-    @Test
-    fun `Get user, when it is requested to get user, then returns user successfully`() {
+    @Test fun `Get users, when it is requested to obtain all users, then returns users`() {
+
+        // ARRANGE
+
+        val EXPECTED_USER_ID_1 = 1L
+        val EXPECTED_USER_NAME_1 = "Zé Renato"
+        val EXPECTED_USER_AGE_1 = "45"
+
+        val EXPECTED_USER_ID_2 = 2L
+        val EXPECTED_USER_NAME_2 = "Ricardo Galho"
+        val EXPECTED_USER_AGE_2 = "46"
+
+        val EXPECTED_USER_ID_3 = 3L
+        val EXPECTED_USER_NAME_3 = "Evelise Vincensi"
+        val EXPECTED_USER_AGE_3 = "25"
+
+        val expectedUser1 = User(EXPECTED_USER_ID_1, EXPECTED_USER_NAME_1, EXPECTED_USER_AGE_1)
+        val expectedUser2 = User(EXPECTED_USER_ID_2, EXPECTED_USER_NAME_2, EXPECTED_USER_AGE_2)
+        val expectedUser3 = User(EXPECTED_USER_ID_3, EXPECTED_USER_NAME_3, EXPECTED_USER_AGE_3)
+
+        val expectedUsers = listOf(expectedUser1, expectedUser2, expectedUser3)
+
+        whenever(userDAOMock.getUsers()).thenReturn(expectedUsers)
+
+        // ACT
+
+        val users = userLocalDataSource.getUsers()
+
+        // ASSERT
+
+        assertEquals(expectedUsers, users)
+    }
+
+    @Test fun `Get user by id, when it is passed an id from a non existent user, then returns null`() {
+
+        // ARRANGE
+
+        val EXPECTED_USER_ID = 0L
+
+        whenever(userDAOMock.getUserById(EXPECTED_USER_ID)).thenReturn(null)
+
+        // ACT
+
+        val user = userLocalDataSource.getUserById(EXPECTED_USER_ID)
+
+        // ASSERT
+
+        assertNull(user)
+    }
+
+    @Test fun `Get user by id, when it is passed an id from an existing user, then returns user successfully`() {
 
         // ARRANGE
 
@@ -33,25 +83,20 @@ class UserLocalDataSourceTest {
         val EXPECTED_USER_NAME = "Zé Renato"
         val EXPECTED_USER_AGE = "45"
 
-        val expectedUser = User(
-            id = EXPECTED_USER_ID,
-            name = EXPECTED_USER_NAME,
-            age = EXPECTED_USER_AGE
-        )
+        val expectedUser = User(EXPECTED_USER_ID, EXPECTED_USER_NAME, EXPECTED_USER_AGE)
 
-        whenever(userDAOMock.getUserById(1)).thenReturn(expectedUser)
+        whenever(userDAOMock.getUserById(EXPECTED_USER_ID)).thenReturn(expectedUser)
 
         // ACT
 
-        val user = userLocalDataSource.getUserById(1L)
+        val user = userLocalDataSource.getUserById(EXPECTED_USER_ID)
 
         // ASSERT
 
         assertEquals(expectedUser, user)
     }
 
-    @Test
-    fun `Save user, when it is passed user name and user age, then verify user is saved locally`() {
+    @Test fun `Save user, when it is passed user name and user age, then verify user is saved locally`() {
 
         // ARRANGE
 

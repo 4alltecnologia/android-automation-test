@@ -15,6 +15,7 @@
         tools:ignore="GoogleAppIndexingWarning">
 
         <activity android:name="com.fourall.aat.views.InputActivity" />
+        <activity android:name="com.fourall.aat.views.ResultActivity" />
 
         <activity
             android:name="com.fourall.aat.views.SplashActivity"
@@ -27,7 +28,7 @@
 
         </activity>
 
-        <activity android:name="com.fourall.aat.views.ResultActivity" />
+        <activity android:name=".views.UsersActivity" />
 
     </application>
 

@@ -16,4 +16,6 @@
 
     <string name="user_not_found">Usuário não encontrado.</string>
 
+    <string name="no_registered_users_yet">Não há usuários cadastrados ainda</string>
+
 </resources>
