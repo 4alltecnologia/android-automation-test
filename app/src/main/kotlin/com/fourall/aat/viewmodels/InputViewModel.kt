@@ -37,7 +37,7 @@ class InputViewModel(
 
         GlobalScope.launch {
 
-            val savedUser = withContext(Dispatchers.Default) {
+            val savedUser = withContext(Dispatchers.IO) {
 
                 userRepository.getUserById(id)
             }
@@ -52,7 +52,7 @@ class InputViewModel(
 
         GlobalScope.launch {
 
-            val createdId = withContext(Dispatchers.Default) {
+            val createdId = withContext(Dispatchers.IO) {
                 userRepository.saveUser(name, age)
             }
 
@@ -72,7 +72,7 @@ class InputViewModel(
 
         GlobalScope.launch {
 
-            val updatedId = withContext(Dispatchers.Default) {
+            val updatedId = withContext(Dispatchers.IO) {
                 userRepository.saveUserById(id, name, age)
             }
 

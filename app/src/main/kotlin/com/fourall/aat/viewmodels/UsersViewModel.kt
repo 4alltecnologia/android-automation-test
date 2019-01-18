@@ -44,7 +44,7 @@ class UsersViewModel(
 
         GlobalScope.launch {
 
-            val users = withContext(Dispatchers.Default) {
+            val users = withContext(Dispatchers.IO) {
 
                 userRepository.getUsers()
             }
