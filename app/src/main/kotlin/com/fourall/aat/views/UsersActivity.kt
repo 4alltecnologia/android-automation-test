@@ -103,6 +103,7 @@ class UsersActivity : BaseActivity() {
 
                 if (command.users.isNotEmpty()) {
 
+                    usersRecyclerView.visibility = View.VISIBLE
                     noUsersTextView.visibility = View.GONE
 
                     usersAdapter = UsersAdapter(command.users, this) { position ->
