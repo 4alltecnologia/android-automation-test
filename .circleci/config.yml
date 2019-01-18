@@ -12,6 +12,9 @@ jobs:
         name: Build Project
         command: ./gradlew :app:assembleDebug
     - run:
+        name: Run ktlint
+        command: ./gradlew ktlint
+    - run:
         name: Run Tests
         command: ./gradlew test
     - store_test_results:
