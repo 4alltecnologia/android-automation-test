@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/bienieklucas/android-automation-test.svg?style=svg)](https://circleci.com/gh/bienieklucas/android-automation-test)
+
 # 4All - Unit Testing Workshop for Android Developers
 
 Simple Android application used like example for the 4All - Unit Testing Workshop for Android Developers.
