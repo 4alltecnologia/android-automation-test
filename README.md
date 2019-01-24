@@ -2,9 +2,9 @@
 
 # 4All - Unit Testing Workshop for Android Developers
 
-![{w=100%}](attachments/workshop_1.png)
-![{w=100%}](attachments/workshop_2.png)
-![{w=100%}](attachments/workshop_3.png)
+![{w=100%}](attachments/workshop_1.jpg)
+![{w=100%}](attachments/workshop_2.jpg)
+![{w=100%}](attachments/workshop_3.jpg)
 
 Simple Android application used like example for the 4All - Unit Testing Workshop for Android Developers.
 
