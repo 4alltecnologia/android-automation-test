@@ -8,7 +8,7 @@ To build and test app, run this: `./gradlew` (or `gradlew.bat`, in Windows machi
 
 To generate code coverage report, run this: `./gradlew` (or `gradlew.bat`, in Windows machine) `jacocoFullTestReport`
 
-## Slides from 4All - Unit Testing Workshop for Android Developers
+## Slides
 
 <object data="attachments/4all_unit_testing_workshop_for_android_developers.pdf" type="application/pdf" width="700px" height="700px">
     <embed src="attachments/4all_unit_testing_workshop_for_android_developers.pdf">
