@@ -12,6 +12,6 @@ Slides from 4All - Unit Testing Workshop for Android Developers:
 
 <object data="attachments/4all_unit_testing_workshop_for_android_developers.pdf" type="application/pdf" width="700px" height="700px">
     <embed src="attachments/4all_unit_testing_workshop_for_android_developers.pdf">
-        <p>This browser does not support PDFs. Please download the PDF to view it: <a href="attachments/4all_unit_testing_workshop_for_android_developers.pdf">Download PDF</a>.</p>
+        <p><a href="attachments/4all_unit_testing_workshop_for_android_developers.pdf">Go to presentation</a>.</p>
     </embed>
 </object>
